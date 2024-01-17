@@ -36,13 +36,10 @@ product9 = Product("Armour Thyroid (Thyroid tablets)", "P009", category3, 70 )
 product10 = Product("Relaxed Fit,", "P010", category2, 400 )
 
 
-category1.no_of_products += 4  
-category2.no_of_products += 3  
-category3.no_of_products += 3  
+category1.no_of_products = int(input(f"Enter the number of products in {category1.name}: "))
+category2.no_of_products = int(input(f"Enter the number of products in {category2.name}: "))
+category3.no_of_products = int(input(f"Enter the number of products in {category3.name}: "))
 
-print(f"{category1.name} (Code: {category1.code}) - No. of Products: {category1.no_of_products}")
-print(f"{category2.name} (Code: {category2.code}) - No. of Products: {category2.no_of_products}")
-print(f"{category3.name} (Code: {category3.code}) - No. of Products: {category3.no_of_products}")
 
 
 bubble_sort([product1, product2, product3, product4, product5, product6, product7, product8, product9, product10],
@@ -61,3 +58,5 @@ if found_product:
     print(f"Name: {found_product.name}, Category: {found_product.category.name}, Price: ${found_product.price}")
 else:
     print(f"\nProduct with code {searched_product_code} not found.")
+
+
