@@ -59,6 +59,12 @@ Product.bubble_sort_products_by_price(products, reverse=True)
 print("\nAll Products Sorted by Price (High to Low):")
 for product in products:
     print(f"Name: {product.name}, Code: {product.code}, Category: {product.category.name}, Price: ${product.price}")
+    
+Product.bubble_sort_products_by_price(products)  
+
+print("\nAll Products Sorted by Price (Low to High):")
+for product in products:
+    print(f"Name: {product.name}, Code: {product.code}, Category: {product.category.name}, Price: ${product.price}")
 
 
 searched_product_code = input("\nEnter the product code to search: ")
