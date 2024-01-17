@@ -4,9 +4,6 @@ class Category:
         self.code = code
         self.no_of_products = 0
 
-    def update_product_count(self, products):
-        self.no_of_products = sum(1 for product in products if product.category == self)
-
     def display_sorted_products(self, products):
         print(f"\nProducts Sorted by Price (High to Low) in {self.name} category:")
         for product in products:
@@ -20,8 +17,8 @@ class Product:
         self.code = code
         self.category = category
         self.price = price
-
-   
+        category.no_of_products += 1
+        
     def bubble_sort_products_by_price(products, reverse=False):
         n = len(products)
         for i in range(n - 1):
@@ -50,12 +47,10 @@ product7 = Product("Stick Pen", "P007", category1, 12)
 product8 = Product("Adidas Stan Smith", "P008", category2, 600)
 product9 = Product("Armour Thyroid (Thyroid tablets)", "P009", category3, 70)
 product10 = Product("Relaxed Fit", "P010", category2, 400)
+product11 = Product("Armour", "P011", category2, 50)
 
-products.extend([product1, product2, product3, product4, product5, product6, product7, product8, product9, product10])
+products.extend([product1, product2, product3, product4, product5, product6, product7, product8, product9, product10, product11])
 
-
-for category in [category1, category2, category3]:
-    category.update_product_count(products)
 
 
 Product.bubble_sort_products_by_price(products, reverse=True)
