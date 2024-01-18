@@ -21,14 +21,17 @@ class Category:
     def add_product(self, product):
         self.products.append(product)
 
-def create_category_tree(categories, parent=None):
-    if not categories:
-        return None
+    def add_child_products_recursively(self, product):
+        for child_category in self.get_all_child_categories():
+            child_category.add_product(product)
 
-    current_category = Category(categories[0], parent)
-    if len(categories) > 1:
-        current_category.children = create_category_tree(categories[1:], current_category)
-    return current_category
+    def get_all_child_categories(self):
+        all_child_categories = []
+        for product in self.products:
+            if isinstance(product, Category):
+                all_child_categories.append(product)
+                all_child_categories.extend(product.get_all_child_categories())
+        return all_child_categories
 
 def display_category(category):
     print(f"Category: {category.code}")
@@ -45,34 +48,39 @@ def display_products_by_category(categories):
             print(f"  - Code: {product.code}, Name: {product.name}")
         print("\n")
 
-categories = ["Vehicle", "Car", "Bike", "Petrol", "Diesel"]
-root_category = create_category_tree(categories)
+vehicle_category = Category("Vehicle")
+car_category = Category("Car", parent=vehicle_category)
+bike_category = Category("Bike", parent=vehicle_category)
+petrol_category = Category("Petrol", parent=car_category)
+diesel_category = Category("Diesel", parent=car_category)
 
+product1 = Product("Ecar", "P001", vehicle_category)
+product2 = Product("Car", "P002", vehicle_category)
+product3 = Product("Bike", "P003", vehicle_category)
+product4 = Product("Sedan", "P004", car_category)
+product5 = Product("Sports Car", "P005", car_category)
+product6 = Product("SUV", "P006", car_category)
+product7 = Product("Yamaha", "P007", bike_category)
+product8 = Product("Ducati", "P008", bike_category)
+product9 = Product("Hayabusa", "P009", bike_category)
+product10 = Product("Ferrari", "P010", petrol_category)
+product11 = Product("Supra", "P011", petrol_category)
+product12 = Product("Mashtang", "P012", petrol_category)
+product13 = Product("Swift", "P013", diesel_category)
+product14 = Product("Verna", "P014", diesel_category)
+product15 = Product("i20", "P015", diesel_category)
 
-product1 = Product("Ecar", "P001", root_category)
-product2 = Product("Car", "P002", root_category)
-product3 = Product("Bike", "P003", root_category)
-product4 = Product("Sedan", "P004", root_category.children)
-product5 = Product("Sports Car", "P005", root_category.children)
-product6 = Product("SUV", "P006", root_category.children)
-product7 = Product("Yamaha", "P007", root_category.children.children)
-product8 = Product("Ducati", "P008", root_category.children.children)
-product9 = Product("Hayabusa", "P009", root_category.children.children)
-product10 = Product("Ferrari", "P010", root_category.children.children.children)
-product11 = Product("Supra", "P011", root_category.children.children.children)
-product12 = Product("Mashtang", "P012", root_category.children.children.children)
-product13 = Product("Swift", "P013", root_category.children.children.children.children)
-product14 = Product("Verna", "P014", root_category.children.children.children.children)
-product15 = Product("i20", "P015", root_category.children.children.children.children)
+# ... (previous code)
 
+categories = [vehicle_category, car_category, bike_category, petrol_category, diesel_category]
 
-display_category(root_category)
+# Add child products recursively
+for category in categories:
+    for product in category.get_all_child_categories():
+        category.add_child_products_recursively(product)
 
-
-display_products_by_category([root_category, root_category.children, root_category.children.children, root_category.children.children.children, root_category.children.children.children.children])
-
-
-
+# Display products for all categories
+display_products_by_category(categories)
 
 
 
