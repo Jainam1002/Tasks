@@ -36,6 +36,13 @@ class Movement:
     def movements_by_product(product, movements):
         return [movement for movement in movements if movement.product == product]
 
+    def execute_movement(self):
+        if self.product.stock_at_locations.get(self.from_location, 0) - self.quantity < 0:
+            raise ValueError(f"Error: Insufficient stock of {self.product.name} at {self.from_location.name}")
+        else:
+            self.product.stock_at_locations[self.from_location] -= self.quantity
+            self.product.stock_at_locations[self.to_location] = self.product.stock_at_locations.get(self.to_location, 0) + self.quantity
+
 
 # Create Location objects
 location1 = Location("Warehouse1", "L001")
@@ -64,14 +71,6 @@ movements = [
     Movement(location2, location3, product2, 100),
     Movement(location3, location4, product2, 120),
 ]
-
-# Manage exceptions if product stock goes negative
-for movement in movements:
-    if movement.product.stock_at_locations.get(movement.from_location, 0) - movement.quantity < 0:
-        print(f"Error: Insufficient stock of {movement.product.name} at {movement.from_location.name}")
-    else:
-        movement.product.stock_at_locations[movement.from_location] -= movement.quantity
-        movement.product.stock_at_locations[movement.to_location] = movement.product.stock_at_locations.get(movement.to_location, 0) + movement.quantity
 
 # Display movements of each product
 for product in [product1, product2, product3, product4, product5]:
