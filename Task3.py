@@ -52,10 +52,10 @@ product4 = Product("Trousers", "P004")
 product5 = Product("Jacket", "P005")
 
 # Initializing stock at locations for products
-product1.stock_at_locations = {location1: 80 , location2: 0 }
-product2.stock_at_locations = {location2: 50 , location3: 0 }
-product3.stock_at_locations = {location3: 90 , location4: 0 }
-product4.stock_at_locations = {location4: 70 , location1: 0 }
+product1.stock_at_locations = {location1: 80 }
+product2.stock_at_locations = {location2: 50 }
+product3.stock_at_locations = {location3: 90 }
+product4.stock_at_locations = {location4: 70 }
 product5.stock_at_locations = {location3: 40}
 
 # Displaying initial stock and movements
@@ -67,9 +67,10 @@ for product in [product1, product2, product3, product4, product5]:
 
 # Creating movement objects
 movement1 = Movement(location1, location2, product1, 30)
-movement2 = Movement(location2, location3, product2, 20)
-movement3 = Movement(location3, location4, product3, 10)
-movement4 = Movement(location4, location1, product4, 40)
+movement2 = Movement(location2, location3, product1, 10)
+movement3 = Movement(location2, location3, product2, 20)
+movement4 = Movement(location3, location4, product3, 10)
+movement5 = Movement(location4, location1, product4, 40)
 
 
 # Processing movement
@@ -77,6 +78,7 @@ movement1.process_movement()
 movement2.process_movement()
 movement3.process_movement()
 movement4.process_movement()
+
 
 # Displaying product list by location (group by location)
 location_product_dict = {}
@@ -89,5 +91,9 @@ for product in [product1, product2, product3, product4, product5]:
 print("\nProduct list by location (group by location):")
 for location, products in location_product_dict.items():
     print(f"{location.name}: {', '.join([f'{product} ({stock} units)' for product, stock in products])}")
+
+for product in [product1, product2, product3, product4, product5]:
+    product.display_stock_at_locations()
+
 
 
