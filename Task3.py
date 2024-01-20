@@ -39,17 +39,17 @@ class Product:
 
 
 # Creating location objects
-location1 = Location("Location1", "L001")
-location2 = Location("Location2", "L002")
-location3 = Location("Location3", "L003")
-location4 = Location("Location4", "L004")
+location1 = Location("WarehouseA", "L001")
+location2 = Location("WarehouseB", "L002")
+location3 = Location("WarehouseC", "L003")
+location4 = Location("WarehouseD", "L004")
 
 # Creating product objects
-product1 = Product("Product1", "P001")
-product2 = Product("Product2", "P002")
-product3 = Product("Product3", "P003")
-product4 = Product("Product4", "P004")
-product5 = Product("Product5", "P005")
+product1 = Product("Tshirts", "P001")
+product2 = Product("Shirts", "P002")
+product3 = Product("Pants", "P003")
+product4 = Product("Trousers", "P004")
+product5 = Product("Jacket", "P005")
 
 # Initializing stock at locations for products
 product1.stock_at_locations = {location1: 80 , location2: 0 }
