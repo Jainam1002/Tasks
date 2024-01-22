@@ -115,7 +115,7 @@ order4 = Order("345678", date(2024, 2, 5), customer4, None, None, [order_line7, 
 orders = [order1, order2, order3, order4]
 
 # Sort orders based on date
-sorted_orders = sorted(orders, key=attrgetter('date'))
+sorted_orders = sorted(orders, key=attrgetter('date'), reverse = True)
 
 # Display sorted orders
 print("Sorted Orders:")
